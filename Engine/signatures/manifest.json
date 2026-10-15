@@ -1,0 +1,179 @@
+{
+  "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "source": "Examples/atlas_reference.c",
+  "builds": [
+    {
+      "target": "arm64-apple-macos14",
+      "optimization": "O0",
+      "entries": 7,
+      "skipped": [
+        "_strcmp: unresolved reference or missing bytes"
+      ]
+    },
+    {
+      "target": "arm64-apple-macos14",
+      "optimization": "O1",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "arm64-apple-macos14",
+      "optimization": "O2",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "arm64-apple-macos14",
+      "optimization": "Os",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-apple-macos14",
+      "optimization": "O0",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-apple-macos14",
+      "optimization": "O1",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-apple-macos14",
+      "optimization": "O2",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-apple-macos14",
+      "optimization": "Os",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "aarch64-linux-gnu",
+      "optimization": "O0",
+      "entries": 7,
+      "skipped": [
+        "strcmp: unresolved reference or missing bytes"
+      ]
+    },
+    {
+      "target": "aarch64-linux-gnu",
+      "optimization": "O1",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "aarch64-linux-gnu",
+      "optimization": "O2",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "aarch64-linux-gnu",
+      "optimization": "Os",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-linux-gnu",
+      "optimization": "O0",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-linux-gnu",
+      "optimization": "O1",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-linux-gnu",
+      "optimization": "O2",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-linux-gnu",
+      "optimization": "Os",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "i386-linux-gnu",
+      "optimization": "O0",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "i386-linux-gnu",
+      "optimization": "O1",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "i386-linux-gnu",
+      "optimization": "O2",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "i386-linux-gnu",
+      "optimization": "Os",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-pc-windows-msvc",
+      "optimization": "O0",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-pc-windows-msvc",
+      "optimization": "O1",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-pc-windows-msvc",
+      "optimization": "O2",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "x86_64-pc-windows-msvc",
+      "optimization": "Os",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "i686-pc-windows-msvc",
+      "optimization": "O0",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "i686-pc-windows-msvc",
+      "optimization": "O1",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "i686-pc-windows-msvc",
+      "optimization": "O2",
+      "entries": 8,
+      "skipped": []
+    },
+    {
+      "target": "i686-pc-windows-msvc",
+      "optimization": "Os",
+      "entries": 8,
+      "skipped": []
+    }
+  ],
+  "uniqueSignatures": 119
+}
