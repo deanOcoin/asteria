@@ -1,0 +1,18 @@
+{
+  "annotations": [],
+  "decompilerNames": {
+    "0:0x1000004f8": {
+      "local_1c_u32": "score"
+    }
+  },
+  "followCode": false,
+  "functionNames": {
+    "0": {
+      "0x1000004f8": "calculate_score"
+    }
+  },
+  "path": "asteria-sample",
+  "sha256": "ef1ab78de5cdd7d5dbd8059bade00690b7bc247b8413f02eb735424afc06ae95",
+  "slice": 0,
+  "version": 1
+}

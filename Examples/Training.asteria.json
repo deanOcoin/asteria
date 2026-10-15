@@ -1,0 +1,14 @@
+{
+  "annotations": [
+    {
+      "address": "0x1000005f8",
+      "bookmark": true,
+      "comment": "Training program entry. Follow the call to score_input to explore branches, variables, and a real LLDB breakpoint.",
+      "label": "Main entry"
+    }
+  ],
+  "path": "asteria-sample",
+  "sha256": "ef1ab78de5cdd7d5dbd8059bade00690b7bc247b8413f02eb735424afc06ae95",
+  "slice": 0,
+  "version": 1
+}
