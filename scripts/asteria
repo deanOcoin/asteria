@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+"""Asteria static CLI. JSON output is compatible with the native app's engine."""
+import argparse
+import json
+from pathlib import Path
+import sys
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'Engine'))
+import analysis
+p=argparse.ArgumentParser(description='Asteria binary inspection')
+commands=p.add_subparsers(dest='action',required=True)
+a=commands.add_parser('analyze'); a.add_argument('path'); a.add_argument('--slice',type=int,default=0); a.add_argument('--out')
+d=commands.add_parser('decompile'); d.add_argument('path'); d.add_argument('--function',default=''); d.add_argument('--slice',type=int,default=0); d.add_argument('--abi',default='auto',choices=['auto','aapcs64','sysv64','win64','cdecl32']); d.add_argument('--json',action='store_true'); d.add_argument('--out')
+h=commands.add_parser('hex'); h.add_argument('path'); h.add_argument('--offset',type=lambda x:int(x,0),default=0); h.add_argument('--count',type=int,default=512)
+s=commands.add_parser('search'); s.add_argument('path'); s.add_argument('query'); s.add_argument('--mode',choices=['text','hex','utf16'],default='text')
+c=commands.add_parser('compare'); c.add_argument('path'); c.add_argument('other')
+k=commands.add_parser('patch'); k.add_argument('path'); k.add_argument('output'); k.add_argument('offset',type=lambda x:int(x,0)); k.add_argument('bytes'); k.add_argument('--sha256',default='')
+l=commands.add_parser('signature-learn',help='Learn an Atlas pack from named functions'); l.add_argument('path'); l.add_argument('--library',required=True); l.add_argument('--slice',type=int,default=0); l.add_argument('--out',required=True)
+i=commands.add_parser('signature-import',help='Install a local Atlas signature pack'); i.add_argument('path')
+q=p.parse_args()
+try:
+    if q.action=='analyze': result=analysis.analyze(q.path,q.slice)
+    elif q.action=='decompile':
+        import decompiler
+        result=decompiler.request(q.path,q.function,q.slice,abi=q.abi)
+    elif q.action=='hex': print(analysis.hex_view(q.path,q.offset,q.count)['text']); sys.exit(0)
+    elif q.action=='search': result=analysis.search(q.path,q.query,q.mode)
+    elif q.action=='compare': result=analysis.compare(q.path,q.other)
+    elif q.action=='patch': result=analysis.patch(q.path,q.output,q.offset,q.bytes,q.sha256)
+    elif q.action=='signature-learn':
+        import recognition
+        learned=recognition.learn(analysis.analyze(q.path,q.slice),q.library)
+        if not learned['count']: raise ValueError('No eligible named functions to learn')
+        result=learned['pack']
+        print('Learned %d signatures; skipped %d functions'%(learned['count'],len(learned['skipped'])),file=sys.stderr)
+    elif q.action=='signature-import':
+        import recognition
+        result=recognition.install(q.path)
+    text=result['text'] if q.action=='decompile' and not q.json else json.dumps(result,indent=2,ensure_ascii=True)+'\n'
+    if getattr(q,'out',None):
+        dest=Path(q.out).expanduser().resolve(); source=Path(q.path).expanduser().resolve()
+        if dest==source: raise ValueError('Cannot overwrite the analyzed binary')
+        with dest.open('x') as f: f.write(text)
+    else: print(text,end='')
+except Exception as error:
+    print('Asteria: '+str(error),file=sys.stderr); sys.exit(1)
