@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          xcodebuild -version
+          xcrun swift --version
+          xcrun llvm-objdump --version | head -2
+      - name: Engine tests
+        run: ./scripts/test.sh
+      - name: Build the app
+        run: ./scripts/build.sh
+      - name: Swift client smoke test
+        run: |
+          mkdir -p .cache/swift
+          xcrun swiftc -module-cache-path .cache/swift \
+            Sources/Asteria/Models.swift Sources/Asteria/EngineClient.swift \
+            Tests/ClientSmoke.swift -o .cache/client-smoke
+          ASTERIA_ROOT="$PWD" .cache/client-smoke
