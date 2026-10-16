@@ -1,3 +1,7 @@
+# Asteria 0.3.2 — 16 October 2026
+
+Projects are portable. A saved project stores the binary's path relative to the project file when the two sit in the same folder, and a project whose absolute path no longer exists is tried against a file of the same name beside it. The bundled example projects open on any machine. Comments trimmed across the engine and app; no analysis behaviour changed.
+
 # Asteria 0.3.1 — 8 September 2026
 
 Fixes slow loading and decompilation on large padding regions. Atlas now scans padding in linear time. A persistent static worker reuses content-validated analysis, native JSON decoding runs off the main actor, code navigation uses indexes, and pseudocode uses a bounded LRU cache. Added cancellation for loading and decompilation, including obsolete selections. Signature learning and bulk name application also avoid repeated whole-image scans.
